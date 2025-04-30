@@ -1,6 +1,13 @@
 import React from "react";
 import { nanoid, } from "nanoid";
 
+const replace_hyphens=(item)=>{
+    return item.replace(/—g/,'-')
+
+    
+}
+
+
 const errorMessage=<span>Error please check your input and try again or use FreeType instead </span>
 
 export const sortMyMeds=(inputText,sort)=>{
@@ -56,7 +63,7 @@ export const sortMyMeds=(inputText,sort)=>{
     const finalArr= sort? concatenatedPairsArray.sort((a, b) => a.localeCompare(b)) :concatenatedPairsArray
 
 
-    return (<ul>{finalArr.map(item=>(<li>{item}</li>))}
+    return (<ul>{finalArr.map(item=>(<li>{replace_hyphens(item)}</li>))}
     </ul>)
     }
 
@@ -86,7 +93,7 @@ export function sortRepeats(str) {
   medsArr.sort((a, b) => a.name.localeCompare(b.name));
     
     return   <ol>
-    {medsArr.map(({name,instructions})=>(<li key={nanoid()}>{name} {instructions}  </li>))}    </ol>
+    {medsArr.map(({name,instructions})=>(<li key={nanoid()}>{replace_hyphens(name)} {replace_hyphens(instructions)}  </li>))}    </ol>
   }
   
 
@@ -108,7 +115,7 @@ export function sortRepeats(str) {
   medsArr.sort((a, b) => a.name.localeCompare(b.name));
     
     return   <ol>
-    {medsArr.map(({name,instructions,quantity})=>(<li key={nanoid()}> {instructions} {quantity} </li>))}    </ol>
+    {medsArr.map(({name,instructions,quantity})=>(<li key={nanoid()}> {replace_hyphens(instructions)} {replace_hyphens(quantity)} </li>))}    </ol>
   }
 
 
@@ -185,9 +192,9 @@ export function sortRepeats(str) {
     
     const drugAndQuantity=filteredText.map(item=>item.slice( sliceBool(item)? 15:12))
     console.log(drugAndQuantity)
-    const meds = drugAndQuantity.map(item=>item.split(',').slice(0,-1).join(""))
+    const meds = drugAndQuantity.map(item=>item.split(',').slice(0,-1).join("")).map(item=>replace_hyphens(item))
       
-    const acuteMeds=(meds.map((item,i)=>`${dates[i]}: ${item}`))
+    const acuteMeds=meds.map((item,i)=>`${dates[i]}: ${item}`)
     const finalMeds= isAcute? acuteMeds:meds.sort((a, b) =>a.localeCompare(b))
    
     return  <ul>{finalMeds.length===1? <li>{finalMeds}</li>: finalMeds.map(item=>(<li key={nanoid()}>{item}</li>))}
