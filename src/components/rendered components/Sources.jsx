@@ -31,7 +31,10 @@ const Sources = ({children}) => {
         {GP?            <li> {'GP'}                                             </li>:null}
         {children}
       </ul>): <p className='small' style={styles.small}>SCR / Patient / TTA / PODs / Carer / Nursing Home / Nursing Home Mar Chart / Community Pharmacy / Relative / HIE/ GP/</p>}
-      </div>
+    <p>Record Pod savings on this <a href='https://nhs.sharepoint.com/sites/msteams_e9b1b6/Lists/POD%20savings/AllItems.aspx' target='_blank'>
+             form
+        </a></p>  
+    </div>
   )
 }
 
